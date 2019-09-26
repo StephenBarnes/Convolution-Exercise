@@ -23,13 +23,12 @@ def convolutions_np(M, T):
     return Dx, Dy
 
 def convolutions_overlap_add(M, T):
-    assert len(M.shape) == 2
-    assert len(T.shape) == 2
     Dx = overlapadd2_int16(M, T)
     Dy = overlapadd2_int16(M, T.T)
     return Dx, Dy
 
-# TODO try PyCuda version
+# TODO implement PyCuda version
+
 
 def positive_int(s):
     val = int(s)

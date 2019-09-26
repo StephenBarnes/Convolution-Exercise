@@ -113,7 +113,9 @@ def overlapadd2_int16(Amat, Hmat, *args, **kwargs):
     """
     Same as overlapadd2, but takes integer-matrix arguments and returns integer matrices.
     """
-    return np.int16(np.round(overlapadd2(np.float64(Amat), np.float64(Hmat))))
+    Amat = Amat.astype(np.float64)
+    Hmat = Hmat.astype(np.float64)
+    return np.int16(np.round(overlapadd2(Amat, Hmat)))
 
 def test():
     from scipy.signal import convolve2d
