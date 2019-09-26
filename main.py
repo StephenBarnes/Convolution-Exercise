@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+Runs the methods on a randomly-generated matrix.
+Takes rows and cols as command-line arguments.
+Also takes --method argument; default is to run cuda method.
+"""
+
 import argparse
 
 import numpy as np
@@ -49,7 +55,7 @@ if __name__ == "__main__":
     parser.add_argument('rows', type=positive_int, help="Number of rows of M")
     parser.add_argument('cols', type=positive_int, help="Number of columns of M")
     parser.add_argument('--method', help="Method to use for computing convolutions",
-            choices=METHODS + ('all',), default='all')
+            choices=METHODS + ('all',), default='cuda')
     args = parser.parse_args()
 
     M = np.random.randint(0, MAX_RANDOM_INT+1, size=(args.rows, args.cols), dtype=np.uint8)

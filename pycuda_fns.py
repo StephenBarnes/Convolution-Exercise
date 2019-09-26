@@ -95,8 +95,8 @@ def convolutions_pycuda(M, T):
     # Run compiled function get_Dx
     get_Dx = mod.get_function("get_Dx")
     get_Dx(Dx_gpu, M_gpu, block=BLOCK_DIM, grid=grid_dim, shared=0)
-    # Copy results back
 
+    # Repeat for Dy
     dx, mx = divmod(Dy.shape[1], BLOCK_DIM[1])
     dy, my = divmod(Dy.shape[0], BLOCK_DIM[0])
     grid_dim = ((dx + (mx>0)), (dy + (my>0)))
@@ -112,4 +112,3 @@ def minmax_pycuda(Dx_gpu, Dy_gpu):
     """
     return (gpuarray.min(Dx_gpu).get(), gpuarray.max(Dx_gpu).get(),
             gpuarray.min(Dy_gpu).get(), gpuarray.max(Dy_gpu).get())
-
