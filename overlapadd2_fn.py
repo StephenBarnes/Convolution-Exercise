@@ -117,6 +117,15 @@ def overlapadd2_int16(Amat, Hmat, *args, **kwargs):
     Hmat = Hmat.astype(np.float64)
     return np.int16(np.round(overlapadd2(Amat, Hmat)))
 
+# This function added by Stephen Barnes
+def convolutions_overlap_add(M, T):
+    """
+    Convolve M and T horizontally and vertically, using overlap-add algorithm.
+    """
+    Dx = overlapadd2_int16(M, T)
+    Dy = overlapadd2_int16(M, T.T)
+    return Dx, Dy
+
 def test():
     from scipy.signal import convolve2d
     A = np.random.randn(33, 55)
